@@ -1,0 +1,36 @@
+baseURL = "https://sono-lab.net/"
+title = "Sono Laboratory"
+theme = "researcher"
+
+defaultContentLanguage = "ja"
+defaultContentLanguageInSubdir = false
+
+[languages]
+  [languages.ja]
+    languageName = "日本語"
+    contentDir = "content/ja"
+    weight = 1
+    title = "Sono Laboratory"
+  [languages.en]
+    languageName = "English"
+    contentDir = "content/en"
+    weight = 2
+    title = "Sono Laboratory"
+
+[params]
+  author = "Takashi Sono"
+  description = "AI and Spine Surgery Research Laboratory"
+
+[menu]
+  [[menu.main]]
+    name = "Home"
+    url = "/"
+    weight = 1
+  [[menu.main]]
+    name = "Members"
+    url = "/members/"
+    weight = 2
+  [[menu.main]]
+    name = "Publications"
+    url = "/publications/"
+    weight = 3

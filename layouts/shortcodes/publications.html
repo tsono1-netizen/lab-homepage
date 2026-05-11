@@ -1,0 +1,10 @@
+<ul>
+{{ range site.Data.publications }}
+  <li>
+    <strong>{{ .title }}</strong><br>
+    {{ .authors }}<br>
+    <em>{{ .journal }}</em>, {{ .year }}.
+    {{ if .pmid }} PMID: <a href="https://pubmed.ncbi.nlm.nih.gov/{{ .pmid }}/">{{ .pmid }}</a>{{ end }}
+  </li>
+{{ end }}
+</ul>
