@@ -523,18 +523,25 @@
   <div class="section-tag"><span class="dot" style="background:var(--blue)"></span>Publications</div>
   <h2>論文一覧</h2>
   <p style="color:#555;max-width:680px;line-height:1.8">
-    主要論文・PubMed掲載論文を順次掲載します。Hugo版ではPubMed自動取得データとの連携も可能です。
+    主要論文・PubMed掲載論文。
   </p>
   <div class="pub-list">
-    <div class="pub-item">
-      <div class="pub-title">Selected publications will be listed here.</div>
-      <div class="pub-meta">Sono T, et al. Journal information and PMID links can be automatically inserted.</div>
+  {{ range site.Data.publications }}
+  <div class="pub-item">
+    <div class="pub-title">
+      <a href="{{ .url }}" target="_blank" class="pub-link">
+        {{ .title }}
+      </a>
     </div>
-    <div class="pub-item">
-      <div class="pub-title">AI-assisted spinal imaging and sagittal alignment analysis</div>
-      <div class="pub-meta">Research theme / ongoing project</div>
+
+    <div class="pub-meta">
+      {{ .authors }}<br>
+      <em>{{ .journal }}</em> ({{ .year }})<br>
+      PMID: {{ .pmid }}
     </div>
   </div>
+  {{ end }}
+</div>
 </section>
 
 <section id="contact">

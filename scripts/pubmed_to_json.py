@@ -1,64 +1,68 @@
+from Bio import Entrez
 import json
-import xml.etree.ElementTree as ET
-from urllib.request import urlopen
-from urllib.parse import quote
+import time
+from xml.etree import ElementTree as ET
 
-AUTHOR_QUERY = 'Sono T[Author]'
-MAX_RESULTS = 30
+Entrez.email = "tsono1@sono-lab.net"
 
-search_url = (
-    "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi"
-    f"?db=pubmed&term={quote(AUTHOR_QUERY)}&retmax={MAX_RESULTS}&sort=date&retmode=json"
+QUERY = '(Sono T[Author]) OR (Sono Takashi[Author])'
+MAX_PAPERS = 20
+
+search = Entrez.esearch(
+    db="pubmed",
+    term=QUERY,
+    retmax=MAX_PAPERS,
+    sort="pub date"
 )
 
-with urlopen(search_url) as r:
-    ids = json.load(r)["esearchresult"]["idlist"]
+record = Entrez.read(search)
+ids = record["IdList"]
 
-if not ids:
-    print("No publications found.")
-    exit()
+papers = []
 
-fetch_url = (
-    "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi"
-    f"?db=pubmed&id={','.join(ids)}&retmode=xml"
-)
+for pmid in ids:
+    try:
+        fetch = Entrez.efetch(
+            db="pubmed",
+            id=pmid,
+            rettype="xml"
+        )
 
-with urlopen(fetch_url) as r:
-    root = ET.parse(r).getroot()
+        xml_data = fetch.read()
+        root = ET.fromstring(xml_data)
 
-publications = []
+        article = root.find(".//PubmedArticle")
 
-for article in root.findall(".//PubmedArticle"):
-    pmid = article.findtext(".//PMID", default="")
-    title = article.findtext(".//ArticleTitle", default="").strip()
+        title = article.findtext(".//ArticleTitle", default="")
 
-    journal = article.findtext(".//Journal/Title", default="")
-    year = (
-        article.findtext(".//PubDate/Year")
-        or article.findtext(".//PubMedPubDate[@PubStatus='pubmed']/Year")
-        or ""
-    )
+        journal = article.findtext(".//Title", default="")
 
-    author_names = []
-    for author in article.findall(".//Author")[:8]:
-        last = author.findtext("LastName", default="")
-        initials = author.findtext("Initials", default="")
-        if last:
-            author_names.append(f"{last} {initials}".strip())
+        year = article.findtext(".//PubDate/Year", default="")
 
-    authors = ", ".join(author_names)
-    if len(article.findall(".//Author")) > 8:
-        authors += ", et al."
+        authors = []
 
-    publications.append({
-        "title": title,
-        "authors": authors,
-        "journal": journal,
-        "year": year,
-        "pmid": pmid
-    })
+        for a in article.findall(".//Author"):
+            lastname = a.findtext("LastName")
+            initials = a.findtext("Initials")
+
+            if lastname and initials:
+                authors.append(f"{lastname} {initials}")
+
+        papers.append({
+            "title": title,
+            "authors": ", ".join(authors),
+            "journal": journal,
+            "year": year,
+            "pmid": pmid,
+            "url": f"https://pubmed.ncbi.nlm.nih.gov/{pmid}/"
+        })
+
+        time.sleep(0.3)
+
+    except Exception as e:
+        print("Error:", pmid, e)
 
 with open("data/publications.json", "w", encoding="utf-8") as f:
-    json.dump(publications, f, ensure_ascii=False, indent=2)
+    json.dump(papers, f, ensure_ascii=False, indent=2)
 
-print(f"Updated {len(publications)} publications.")
+print(f"Saved {len(papers)} papers.")
