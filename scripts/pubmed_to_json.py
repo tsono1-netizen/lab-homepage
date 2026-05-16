@@ -5,7 +5,7 @@ from xml.etree import ElementTree as ET
 
 Entrez.email = "tsono1@sono-lab.net"
 
-QUERY = '(Sono T[Author]) OR (Sono Takashi[Author])'
+QUERY = '(Sono Takashi[Author])'
 MAX_PAPERS = 20
 
 search = Entrez.esearch(
