@@ -129,15 +129,26 @@
     animation: spin 14s linear infinite;
   }
   .ai-nucleus {
-    position: absolute; top: 50%; left: 50%;
-    transform: translate(-50%,-50%);
-    width: 66px; height: 66px;
-    background: var(--navy);
-    border-radius: 50%;
-    z-index: 2;
-    display:flex; align-items:center; justify-content:center;
-    color:var(--cream); font-family:'Syne', sans-serif; font-size:.85rem; font-weight:800;
-  }
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 120px;
+  height: 120px;
+  background: white;
+  border-radius: 50%;
+  z-index: 2;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  box-shadow: 0 0 20px rgba(0,0,0,.15);   
+}
+.ai-nucleus img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
   .orbit {
     position: absolute; top: 50%; left: 50%;
     transform: translate(-50%,-50%);
@@ -379,7 +390,9 @@
       <div class="orbit orbit-2"><div class="particle p2"></div><div class="particle p5" style="top:auto;bottom:-5px;left:30%;"></div></div>
       <div class="orbit orbit-3"><div class="particle p3"></div><div class="particle p6" style="top:auto;bottom:-5px;left:70%;"></div></div>
       <div class="ai-core"></div>
-      <div class="ai-nucleus">AI</div>
+      <div class="ai-nucleus">
+        <img src="/Icon.jpg" alt="Sono Laboratory Logo">
+</div>
       <div class="spine-line" aria-hidden="true">
         <div class="vertebra"></div><div class="vertebra"></div><div class="vertebra"></div><div class="vertebra"></div><div class="vertebra"></div><div class="vertebra"></div><div class="vertebra"></div><div class="vertebra"></div>
       </div>
@@ -488,16 +501,17 @@
       <div class="member-role">Principal Investigator / Spine Surgeon</div>
     </div>
     <div class="member-card">
-      <div class="member-avatar" style="background:rgba(58,134,255,.15);border-color:var(--blue)">🧠</div>
-      <div class="member-name">AI Imaging Team</div>
-      <div class="member-role">Medical AI / Image Analysis</div>
-    </div>
-    <div class="member-card">
-      <div class="member-avatar" style="background:rgba(255,107,107,.15);border-color:var(--coral)">🧬</div>
-      <div class="member-name">Basic Science Team</div>
-      <div class="member-role">OPLL / Molecular Biology</div>
-    </div>
-    <div class="member-card">
+  <div class="member-avatar" style="background:rgba(58,134,255,.15);border-color:var(--blue)">🧠</div>
+  <div class="member-name">Ryohei Saito</div>
+  <div class="member-role">Doctoral Course D3</div>
+</div>
+
+<div class="member-card">
+  <div class="member-avatar" style="background:rgba(0,201,167,.15);border-color:var(--teal)">🦴</div>
+  <div class="member-name">Atsushi Tanaka</div>
+  <div class="member-role">Doctoral Course D2</div>
+</div>
+ <div class="member-card">
       <div class="member-avatar" style="background:rgba(255,217,61,.15);border-color:var(--amber)">🤝</div>
       <div class="member-name">Collaborators</div>
       <div class="member-role">Engineering / Clinical Research</div>
