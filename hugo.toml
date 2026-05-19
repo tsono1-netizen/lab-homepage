@@ -2,8 +2,6 @@ baseURL = "https://sono-lab.net/"
 title = "Sono Laboratory"
 theme = "researcher"
 
-enableRobotsTXT = true
-
 defaultContentLanguage = "ja"
 defaultContentLanguageInSubdir = false
 
@@ -36,3 +34,5 @@ defaultContentLanguageInSubdir = false
     name = "Publications"
     url = "/publications/"
     weight = 3
+
+enableRobotsTXT = true
