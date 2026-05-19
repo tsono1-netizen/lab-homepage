@@ -1,6 +1,8 @@
-baseURL = "https://tsono1-netizen.github.io/lab-homepage/"
+baseURL = "https://sono-lab.net/"
 title = "Sono Laboratory"
 theme = "researcher"
+
+enableRobotsTXT = true
 
 defaultContentLanguage = "ja"
 defaultContentLanguageInSubdir = false
