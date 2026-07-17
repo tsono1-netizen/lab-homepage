@@ -268,9 +268,21 @@
 
   #members { background: var(--navy); color: var(--cream); border-top: 3px solid var(--teal); }
   #members h2 { color: var(--cream); }
-  .members-grid {
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;
-    margin-top: 3rem;
+  @media (max-width:560px){
+  .members-grid{
+      grid-template-columns:1fr;
+  }
+
+  .research-grid{
+      grid-template-columns:1fr;
+  }
+
+  .stats-bar{
+      grid-template-columns:1fr;
+  }
+
+}
+
   }
   .member-card {
     background: rgba(255,255,255,.05);
