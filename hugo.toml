@@ -1,5 +1,5 @@
 baseURL = "https://sono-lab.net/"
-title = "Sono Laboratory"
+title = "Sono Spine Laboratory"
 theme = "researcher"
 
 defaultContentLanguage = "ja"
@@ -10,12 +10,12 @@ defaultContentLanguageInSubdir = false
     languageName = "日本語"
     contentDir = "content/ja"
     weight = 1
-    title = "Sono Laboratory"
+    title = "Sono Spine Laboratory"
   [languages.en]
     languageName = "English"
     contentDir = "content/en"
     weight = 2
-    title = "Sono Laboratory"
+    title = "Sono Spine Laboratory"
 
 [params]
   author = "Takashi Sono"
