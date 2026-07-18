@@ -1,0 +1,9 @@
+cd C:\sono-lab
+
+git add data\publications.json
+
+git status
+
+git commit -m "update PubMed publications"
+
+git push
